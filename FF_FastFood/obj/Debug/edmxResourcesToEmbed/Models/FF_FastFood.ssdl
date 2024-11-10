@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FF_FastFoodModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="account_id" />
+    </Key>
+    <Property Name="account_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="role" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="PasswordResetCode" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ResetCodeExpiration" Type="datetime" />
+    <Property Name="isActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Addresses">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="street" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="ward" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="district" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="city" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="zip_code" Type="nvarchar" MaxLength="20" />
+    <Property Name="country" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="customer_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Banner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bannerIMG" Type="nvarchar(max)" />
+    <Property Name="title" Type="nvarchar" MaxLength="255" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="linkURL" Type="nvarchar" MaxLength="255" />
+    <Property Name="seo_title" Type="nvarchar" MaxLength="255" />
+    <Property Name="seo_descript" Type="nvarchar(max)" />
+    <Property Name="seo_keywords" Type="nvarchar" MaxLength="255" />
+    <Property Name="slug" Type="nvarchar" MaxLength="255" />
+    <Property Name="start_Date" Type="datetime" />
+    <Property Name="end_Date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="cart_id" />
+    </Key>
+    <Property Name="cart_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customer_id" Type="int" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Cart_Items">
+    <Key>
+      <PropertyRef Name="cart_item_id" />
+    </Key>
+    <Property Name="cart_item_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cart_id" Type="int" />
+    <Property Name="food_id" Type="int" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="category_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="seo_title" Type="nvarchar" MaxLength="255" />
+    <Property Name="seo_description" Type="nvarchar(max)" />
+    <Property Name="seo_keywords" Type="nvarchar(max)" />
+    <Property Name="slug" Type="nvarchar" MaxLength="255" />
+    <Property Name="IMG_URL" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="customer_id" />
+    </Key>
+    <Property Name="customer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="account_id" Type="int" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="email" Type="nvarchar" MaxLength="100" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Deliverers">
+    <Key>
+      <PropertyRef Name="deliverer_id" />
+    </Key>
+    <Property Name="deliverer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="account_id" Type="int" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="email" Type="nvarchar" MaxLength="100" />
+    <Property Name="vehicle_info" Type="nvarchar" MaxLength="255" />
+    <Property Name="status" Type="nvarchar" MaxLength="50" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Deliveries">
+    <Key>
+      <PropertyRef Name="delivery_id" />
+    </Key>
+    <Property Name="delivery_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="order_id" Type="int" />
+    <Property Name="deliverer_id" Type="int" />
+    <Property Name="assigned_at" Type="datetime" />
+    <Property Name="accepted_at" Type="datetime" />
+    <Property Name="completed_at" Type="datetime" />
+    <Property Name="status" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="employee_id" />
+    </Key>
+    <Property Name="employee_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="account_id" Type="int" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="position" Type="nvarchar" MaxLength="50" />
+    <Property Name="phone" Type="varchar" MaxLength="20" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="hire_date" Type="datetime" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Foods">
+    <Key>
+      <PropertyRef Name="food_id" />
+    </Key>
+    <Property Name="food_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="price" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="category_id" Type="int" />
+    <Property Name="image_url" Type="nvarchar" MaxLength="255" />
+    <Property Name="seo_title" Type="nvarchar" MaxLength="255" />
+    <Property Name="seo_description" Type="nvarchar(max)" />
+    <Property Name="seo_keywords" Type="nvarchar(max)" />
+    <Property Name="slug" Type="nvarchar" MaxLength="255" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Order_Items">
+    <Key>
+      <PropertyRef Name="order_item_id" />
+    </Key>
+    <Property Name="order_item_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="order_id" Type="int" />
+    <Property Name="food_id" Type="int" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="price" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="order_id" />
+    </Key>
+    <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customer_id" Type="int" />
+    <Property Name="order_date" Type="datetime" />
+    <Property Name="total_amount" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="status" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="payment_id" Type="int" />
+    <Property Name="address_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Payments">
+    <Key>
+      <PropertyRef Name="payment_id" />
+    </Key>
+    <Property Name="payment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="order_id" Type="int" />
+    <Property Name="payment_method" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="payment_status" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="transaction_id" Type="nvarchar" MaxLength="255" />
+    <Property Name="amount" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__Address__custome__4F47C5E3">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="Addresses" Type="Self.Addresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="Addresses">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cart__customer_i__17F790F9">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cart_Item__cart___1CBC4616">
+    <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+    <End Role="Cart_Items" Type="Self.Cart_Items" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="cart_id" />
+      </Principal>
+      <Dependent Role="Cart_Items">
+        <PropertyRef Name="cart_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cart_Item__food___1DB06A4F">
+    <End Role="Foods" Type="Self.Foods" Multiplicity="0..1" />
+    <End Role="Cart_Items" Type="Self.Cart_Items" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Foods">
+        <PropertyRef Name="food_id" />
+      </Principal>
+      <Dependent Role="Cart_Items">
+        <PropertyRef Name="food_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Customers__accou__440B1D61">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="account_id" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="account_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Deliverer__accou__5DCAEF64">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+    <End Role="Deliverers" Type="Self.Deliverers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="account_id" />
+      </Principal>
+      <Dependent Role="Deliverers">
+        <PropertyRef Name="account_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Deliverie__deliv__628FA481">
+    <End Role="Deliverers" Type="Self.Deliverers" Multiplicity="0..1" />
+    <End Role="Deliveries" Type="Self.Deliveries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Deliverers">
+        <PropertyRef Name="deliverer_id" />
+      </Principal>
+      <Dependent Role="Deliveries">
+        <PropertyRef Name="deliverer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Deliverie__order__619B8048">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+    <End Role="Deliveries" Type="Self.Deliveries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="Deliveries">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employees__accou__3F466844">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+    <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="account_id" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="account_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Foods__category___4CA06362">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+    <End Role="Foods" Type="Self.Foods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="Foods">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order_Ite__food___5441852A">
+    <End Role="Foods" Type="Self.Foods" Multiplicity="0..1" />
+    <End Role="Order_Items" Type="Self.Order_Items" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Foods">
+        <PropertyRef Name="food_id" />
+      </Principal>
+      <Dependent Role="Order_Items">
+        <PropertyRef Name="food_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order_Ite__order__534D60F1">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+    <End Role="Order_Items" Type="Self.Order_Items" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="Order_Items">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__customer__5070F446">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Payments__order___59063A47">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+    <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Addresses">
+    <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Addresses">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="address_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FF_FastFoodModelStoreContainer">
+    <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cart_Items" EntityType="Self.Cart_Items" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Deliverers" EntityType="Self.Deliverers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Deliveries" EntityType="Self.Deliveries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Foods" EntityType="Self.Foods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order_Items" EntityType="Self.Order_Items" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Address__custome__4F47C5E3" Association="Self.FK__Address__custome__4F47C5E3">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Addresses" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cart__customer_i__17F790F9" Association="Self.FK__Cart__customer_i__17F790F9">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cart_Item__cart___1CBC4616" Association="Self.FK__Cart_Item__cart___1CBC4616">
+      <End Role="Cart" EntitySet="Cart" />
+      <End Role="Cart_Items" EntitySet="Cart_Items" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cart_Item__food___1DB06A4F" Association="Self.FK__Cart_Item__food___1DB06A4F">
+      <End Role="Foods" EntitySet="Foods" />
+      <End Role="Cart_Items" EntitySet="Cart_Items" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Customers__accou__440B1D61" Association="Self.FK__Customers__accou__440B1D61">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Deliverer__accou__5DCAEF64" Association="Self.FK__Deliverer__accou__5DCAEF64">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Deliverers" EntitySet="Deliverers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Deliverie__deliv__628FA481" Association="Self.FK__Deliverie__deliv__628FA481">
+      <End Role="Deliverers" EntitySet="Deliverers" />
+      <End Role="Deliveries" EntitySet="Deliveries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Deliverie__order__619B8048" Association="Self.FK__Deliverie__order__619B8048">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Deliveries" EntitySet="Deliveries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employees__accou__3F466844" Association="Self.FK__Employees__accou__3F466844">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Foods__category___4CA06362" Association="Self.FK__Foods__category___4CA06362">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Foods" EntitySet="Foods" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order_Ite__food___5441852A" Association="Self.FK__Order_Ite__food___5441852A">
+      <End Role="Foods" EntitySet="Foods" />
+      <End Role="Order_Items" EntitySet="Order_Items" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order_Ite__order__534D60F1" Association="Self.FK__Order_Ite__order__534D60F1">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Order_Items" EntitySet="Order_Items" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__customer__5070F446" Association="Self.FK__Orders__customer__5070F446">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Payments__order___59063A47" Association="Self.FK__Payments__order___59063A47">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Addresses" Association="Self.FK_Orders_Addresses">
+      <End Role="Addresses" EntitySet="Addresses" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

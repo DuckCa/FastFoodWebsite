@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Chartcontrol";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+@{ViewBag.PageName = "Chartcontrol";}
+
+@{ViewBag.url = "Index";}
+@{ ViewBag.SearchController = "Admin";
+    ViewBag.SearchView = "Chartcontrol";}
+
+<h2>Chartcontrol</h2>
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+<script>
+  const ctx = document.getElementById('myChart');
+
+   var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: @Html.Raw(Json.Encode(Model))
+    });
+</script>
